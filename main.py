@@ -15,19 +15,30 @@ def matAdd(m1, m2):
     return solution
 
 def matMul(m1, m2):
-    ...
+    solution = [[] for i in range(len(m1))]
 
+    if len(m1[0]) == len(m2):
+        m2 = [[i[j] for i in m2] for j in range(len(m2[0]))]
+        for row in range(len(m1)):
+            for col in range(len(m2)):
+                num = sum([m1[row][i]*m2[col][i] for i in range(len(m1[row]))])
+                solution[row].append(num)
+
+    return solution
+
+def display(matrix):
+    for i in matrix:
+        for j in i:
+            print(j, end=' ')
+        print()
 
 def main():
-    AplusB = matAdd(A, B)
-    CplusD = matAdd(C, D)
+    AB = matMul(A, B)
+    CD = matMul(C, D)
 
-    for i in [AplusB, CplusD]:
-        for matrix in i:
-            for j in matrix:
-                print(j, end='  ')
-            print()
-        print('\n\n')
+    display(AB)
+    print('\n')
+    display(CD)
 
 
 if __name__ == '__main__':
